@@ -3,7 +3,7 @@
 
 #include <cmath>
 #include <iostream>
-
+using namespace std;
 class vec3 {
     public:
         double e[3];
@@ -38,7 +38,7 @@ class vec3 {
         }
 
         double length() const {
-            return sqrt(length_squared());
+            return std::sqrt(length_squared());
         }
 
         double length_squared() const {
@@ -67,8 +67,9 @@ inline vec3 operator*(const vec3& u, const vec3& v) {
 }
 
 inline vec3 operator*(double t, const vec3& v) {
-    return t*v;
+    return vec3(t*v.e[0], t*v.e[1], t*v.e[2]);
 }
+
 
 inline vec3 operator/(const vec3& v, double t) {
     return (1/t)*v;
