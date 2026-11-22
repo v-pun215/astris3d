@@ -3,7 +3,22 @@
 #include "vec3.hpp"
 #include "ray.hpp"
 
+bool hitting_sphere(const point3& center, double radius, const ray& r) {
+    vec3 oc=center-r.origin();
+
+    auto a=dot(r.direction(), r.direction());
+    auto b=dot(-2*r.direction(), oc);
+    auto c=dot(oc, oc)-radius*radius;
+
+    auto d=b*b-4*a*c;
+    return d>=0;
+
+}
+
 color ray_color(const ray& r) {
+    if (hitting_sphere(point3(0,0,-1), 0.5, r)) {
+        return color(1,0,0);
+    }
     vec3 unit_dir= unit_vector(r.direction());
     auto a= 0.5*(unit_dir.x()+1.0);
 
